@@ -2,6 +2,7 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.huangdeyi.distribute</groupId>
@@ -13,69 +14,13 @@
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
-  <!--同一管理jar包的版本-->
+  <!--统一管理jar包的版本-->
   <properties>
     <spring-version>4.3.12.RELEASE</spring-version>
     <jackson-version>2.9.8</jackson-version>
   </properties>
 
   <dependencies>
-    <!-- spring-core : 核心容器 -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>${spring-version}</version>
-    </dependency>
-
-    <!-- spring-context : 上下文 -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>${spring-version}</version>
-    </dependency>
-
-    <!-- spring-beans : beans管理-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
-      <version>${spring-version}</version>
-    </dependency>
-
-    <!-- spring-aspects :  spring与aspectj整合-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-aspects</artifactId>
-      <version>${spring-version}</version>
-    </dependency>
-
-    <!-- aspectjweaver : spring与aspectj整合时需要的jar包 -->
-    <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjweaver</artifactId>
-      <version>1.9.2</version>
-    </dependency>
-
-    <!-- spring-aop : 面向切面编程-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-aop</artifactId>
-      <version>${spring-version}</version>
-    </dependency>
-
-    <!-- aopalliance : 支持spring的aop -->
-    <dependency>
-      <groupId>aopalliance</groupId>
-      <artifactId>aopalliance</artifactId>
-      <version>1.0</version>
-    </dependency>
-
-    <!-- spring-tx : 事务管理-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-tx</artifactId>
-      <version>${spring-version}</version>
-    </dependency>
-
     <!-- spring-jdbc : spring对jdbc数据访问封装的所有类 -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -138,13 +83,6 @@
       <version>${jackson-version}</version>
     </dependency>
 
-    <!-- 项目使用mysql数据库 -->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.46</version>
-    </dependency>
-
     <!--引入shiro-->
     <dependency>
       <groupId>org.apache.shiro</groupId>
@@ -152,31 +90,20 @@
       <version>1.4.1</version>
     </dependency>
 
+    <!--引入用户中心模块提供的API-->
+    <!--会引入用户中心模块所依赖的jar包(如果当前lib中没有对应的jar包)-->
+    <!--不会引入用户中心所配置的统一jar包管理版本号-->
     <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>dubbo</artifactId>
-      <version>2.5.3</version>
-      <!--去掉dubbo默认的低版本spring-->
-      <exclusions>
-        <exclusion>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring</artifactId>
-        </exclusion>
-      </exclusions>
+      <groupId>com.huangdeyi.distributed</groupId>
+      <artifactId>userService</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
 
-    <!--引入zkClient的jar包(dubbo使用zkclient连接zookeeper)-->
+    <!--引入订单中心的API-->
     <dependency>
-      <groupId>com.github.sgroschupf</groupId>
-      <artifactId>zkclient</artifactId>
-      <version>0.1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
+      <groupId>com.huangdeyi.distributed</groupId>
+      <artifactId>orderservice</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>
