@@ -16,7 +16,7 @@
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <!--到指定包下扫描组件注解-->
-    <context:component-scan base-package="controller"/>
+    <context:component-scan base-package="controller,com.huangdeyi.distribute.custom"/>
 
     <!--注册默认处理器映射器和处理器适配器-->
     <mvc:annotation-driven/>
@@ -32,12 +32,23 @@
 
     <!--注册json格式数据的HttpMessageConvert（消息转换器）-->
     <bean id="mappingJackson2HttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-          <property name="supportedMediaTypes">
-              <list>
-                  <value>application/json;charset=UTF-8</value>
-              </list>
-          </property>
+         <property name="supportedMediaTypes">
+            <list>
+               <value>application/json;charset=UTF-8</value>
+            </list>
+         </property>
+
+         <property name="objectMapper">
+            <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                <property name="dateFormat">
+                    <bean class="java.text.SimpleDateFormat">
+                       <constructor-arg type="java.lang.String" value="yyyy-MM-dd"/>
+                    </bean>
+                </property>
+            </bean>
+         </property>
     </bean>
+
     <!--注入到带注解的Controller方法上的messageConverters属性-->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
          <property name="messageConverters">
