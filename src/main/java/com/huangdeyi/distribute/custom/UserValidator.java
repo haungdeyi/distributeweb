@@ -23,6 +23,6 @@ public class UserValidator implements Validator {
     }
 
     public void validate(Object target, Errors errors) {
-         //在这里写验证逻辑
+        //在这里写验证逻辑
     }
 }

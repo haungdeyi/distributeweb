@@ -17,9 +17,9 @@ public class MainCtroller {
     /**
      * 在进入控制器方法之前会先调用这个方法
      */
-    @InitBinder
-    public void initBinder(WebDataBinder webDataBinder){
+    //@InitBinder
+    /*public void initBinder(WebDataBinder webDataBinder){
         webDataBinder.setValidator(new UserValidator());
-    }
+    }*/
 
 }
