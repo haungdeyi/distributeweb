@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/beans/spring-context.xsd
                            http://code.alibabatech.com/schema/dubbo
                            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
@@ -19,5 +22,23 @@
 
     <!--订单中心模块-->
     <import resource="classpath*:META-INF/client/ordercenter-customer.xml"/>
+
+    <!--session共享-->
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
+    <bean id="cookieSerializer" class="org.springframework.session.web.http.DefaultCookieSerializer">
+         <property name="cookiePath" value="/"/>
+    </bean>
+    <bean id="cookieHttpSessionStrategy" class="org.springframework.session.web.http.CookieHttpSessionStrategy">
+        <property name="cookieSerializer" ref="cookieSerializer"/>
+    </bean>
+
+    <!--Jedis连接工厂-->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+         <property name="hostName" value="${redis.host}"/>
+         <property name="port" value="${redis.port}"/>
+    </bean>
+
+    <!--propertites文件解析-->
+    <context:property-placeholder location="classpath:application.properties"/>
 
 </beans>
