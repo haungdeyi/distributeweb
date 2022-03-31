@@ -16,7 +16,7 @@
 
   <!--统一管理jar包的版本-->
   <properties>
-    <spring-version>4.3.12.RELEASE</spring-version>
+    <spring-version>5.3.18</spring-version>
     <jackson-version>2.9.8</jackson-version>
   </properties>
 
